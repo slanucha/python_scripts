@@ -2,6 +2,7 @@ import os
 import glob
 import cv2
 import xml.etree.ElementTree as ET
+import argparse
 
 
 def get_path_filename_and_ext(filepath):
@@ -50,7 +51,13 @@ def flip_IMG(path, filename, ext, suffix):
 
 
 if __name__ == '__main__':
-    path = './'
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-p', '--path',
+                        default='./',
+                        help='Path where images to flip are stored. Curent directory is the default value')
+    args = parser.parse_args()
+
+    path = args.path
     suffix = '_flipped'
     for f in glob.glob(path + '*.jpg'):
         path, filename, ext = get_path_filename_and_ext(f)
